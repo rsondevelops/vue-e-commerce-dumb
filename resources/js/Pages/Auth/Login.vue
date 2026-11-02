@@ -1,7 +1,7 @@
 <script setup>
 import { useForm, Link, Head } from '@inertiajs/vue3';
 import AppInput from '@/Components/AppInput.vue';
-import AppButton from '@/Components/AppButton.vue';
+import AppwButton from '@/Components/AppButton.vue';
 
 const form = useForm({
     email: '',
@@ -32,7 +32,7 @@ function submit() {
             <form @submit.prevent="submit" class="auth-form">
                 <AppInput
                     v-model="form.email"
-                    type="email"
+                    type="text"
                     label="Email"
                     placeholder="nama@email.com"
                     :error="form.errors.email"

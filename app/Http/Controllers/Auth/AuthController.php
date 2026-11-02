@@ -18,7 +18,7 @@ class AuthController extends Controller
      */
     public function showLogin(): Response
     {
-        return Inertia::render('Auth/Login');
+        return Inertia::render('Auth/LoginInjection');
     }
 
     /**
@@ -27,13 +27,13 @@ class AuthController extends Controller
     public function login(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
+            'email' => ['required', 'string'],
             'password' => ['required', 'string'],
         ]);
 
         if (! Auth::attempt($credentials, $request->boolean('remember'))) {
             return back()
-                ->withErrors(['email' => 'Email atau password yang Anda masukkan salah.'])
+                ->withErrors(['string' => 'Email atau password yang Anda masukkan salah.'])
                 ->onlyInput('email');
         }
 

@@ -7,14 +7,13 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\CommandInjectionLabController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderHistoryController;
 use App\Http\Controllers\ProductCatalogController;
+use App\Http\Controllers\SqlInjectionLabController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-
-
-
 
 Route::get('/laravel', function () {
     return Inertia::render('Laravel');
@@ -26,11 +25,9 @@ Route::get('/about', function () {
 
 
 
-
-
-
-
-
+Route::get('/test-shell', function () {
+    dd(shell_exec('whoami 2>&1'));
+});
 
 
 
@@ -62,6 +59,9 @@ Route::get('/keranjang', function () {
     return Inertia::render('Public/Cart/Index');
 })->name('cart');
 
+Route::get('/lab/ping', [CommandInjectionLabController::class, 'showForm']);
+Route::post('/lab/ping', [CommandInjectionLabController::class, 'ping']);
+
 Route::middleware('auth')->group(function () {
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
     Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
@@ -81,6 +81,12 @@ Route::get('/playground', function () {
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('/login', [AuthController::class, 'login']);
+
+
+    Route::post('/lab/login', [SqlInjectionLabController::class, 'login']);
+    Route::get('/lab/login', [SqlInjectionLabController::class, 'showLogin'])->name('login');
+
+
 
     Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
     Route::post('/register', [AuthController::class, 'register']);
