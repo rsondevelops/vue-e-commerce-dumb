@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Admin E-Commerce RSON',
             'email' => 'admin@gmail.com',
-            'password' => Hash::make('password'),
+            'password' => 'password',
             'role' => 'admin',
             'phone' => '081200000001',
             'address' => 'Kantor Pusat E-Commerce RSON, Jakarta',
