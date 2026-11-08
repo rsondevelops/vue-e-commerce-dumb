@@ -8,10 +8,12 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CommandInjectionLabController;
+use App\Http\Controllers\CsrfLabController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderHistoryController;
 use App\Http\Controllers\ProductCatalogController;
 use App\Http\Controllers\SqlInjectionLabController;
+use App\Http\Controllers\XssLabController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -23,30 +25,16 @@ Route::get('/about', function () {
     return Inertia::render('About');
 });
 
-
-
 Route::get('/test-shell', function () {
     dd(shell_exec('whoami 2>&1'));
 });
 
+Route::get('/lab/xss', [XssLabController::class, 'index']);
+Route::post('/lab/xss', [XssLabController::class, 'store']);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Route::get('/lab/csrf', [CsrfLabController::class, 'showProfile']);
+Route::post('/lab/csrf/update-email', [CsrfLabController::class, 'updateEmail']);
 
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
