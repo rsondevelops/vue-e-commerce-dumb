@@ -32,7 +32,7 @@ class AuthController extends Controller
         ]);
 
         if (! Auth::attempt($credentials, $request->boolean('remember'))) {
-            return back()
+            return backAuth()
                 ->withErrors(['string' => 'Email atau password yang Anda masukkan salah.'])
                 ->onlyInput('email');
         }
